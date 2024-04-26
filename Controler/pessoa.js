@@ -1,9 +1,13 @@
 import { openDb } from '../configDB.js';
 
-const createTable = () => {
+export async function createTable() {
     openDb().then(db => {
-        db.exec('CREATE TABLE IF NOT EXIST Pessoa ( id INTEGER PRIMARY KEY, nome TEXT, idade INTEGER )')
+        db.exec('CREATE TABLE IF NOT EXISTS Pessoa ( id INTEGER PRIMARY KEY, nome TEXT, idade INTEGER )')
     })
-}
+};
 
-export default createTable;
+export async function insert(pessoa) {
+    openDb().then(db => {
+        db.run('INSERT INTO Pessoa (nome, idade) VALUES (?,?)', [pessoa.nome, pessoa.idade]);
+    })
+};
