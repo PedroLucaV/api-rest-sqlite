@@ -15,23 +15,22 @@ app.get('/', (req, res) => {
 });
 
 app.post('/pessoa', (req, res) => { //endpoint to create a new people on table in SQLite
-    // const { id, nome, idade } = req.body
-    // if (!nome || !idade) { //validate if has name and age
-    //     res.json({
-    //         "statusCode": 400,
-    //         "message": "Está faltando dados para a criação do usuário"
-    //     })
-    //     return
-    // }
+    const { nome, idade } = req.body
+    if (!nome || !idade) { //validate if has name and age
+        res.json({
+            "statusCode": 400,
+            "message": "Está faltando dados para a criação do usuário"
+        })
+        return
+    }
 
     // consultar se a pessoa já existe no banco de dados
 
     //constroi um ob
-    // const pessoa ={
-    //     id: id,
-    //     nome:nome,
-    //     idade: idade
-    // }
+    const pessoas ={
+        nome:nome,
+        idade: idade
+    }
 
     console.log(req.body);
     insert(pessoas)
